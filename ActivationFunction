@@ -1,0 +1,57 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def sigmoid(x):
+    y=1.0/(1.0+np.exp(-x))
+    return y
+
+def lrelu(x,a):
+    y=x.copy()
+    for i in range(y.shape[0]):
+        if y[i]<0:
+            y[i]=a*y[i]
+    return y
+def tanh(x):
+    y=(1.0-np.exp(-2*x))/(1.0+np.exp(-2*x))
+    return y
+def softplus(x):
+    y=np.log(np.exp(x)+1)
+    return y
+def relu(x):
+    y=x.copy()
+    y[y<0]=0
+    return y
+def softsign(x):
+    y=x/(np.abs(x)+1)
+    return y
+def elu(x,a):
+    y=x.copy()
+    for i in range(y.shape[0]):
+        if y[i]<0:
+            y[i]=a*(np.exp(y[i])-1)
+    return y
+x=np.linspace(start=-10,stop=10,num=100)
+x1=np.linspace(start=-1,stop=1,num=100)
+y=np.linspace(start=-2,stop=2,num=10)
+#y=lrelu(x,0.25)
+#print(x)
+#print(y)
+
+#plt.plot(fpr, tpr, lw=1, label='ROC fold %d (auc(area) = %0.4f)'
+         
+#plt.plot(x,y)
+#plt.grid(True)
+#plt.show()
+         
+#sub_axix = filter(lambda x:x%200 == 0, x_axix)
+plt.title('ActivationFunction')
+plt.plot(x, lrelu(x,0.25), color='green', label='lrelu')
+plt.plot(x, sigmoid(x), color='red', label='sigmoid')
+plt.plot(x, tanh(x), color='blue', label='tanh')
+#plt.plot(x, train_pn_dis,  color='skyblue', label='PN distance')
+#plt.plot(x, thresholds, color='blue', label='threshold')
+plt.legend() # 显示图例
+ 
+plt.xlabel('iteration times')
+plt.ylabel('rate')
+plt.show()
